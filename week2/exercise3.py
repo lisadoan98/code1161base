@@ -43,12 +43,16 @@ pass
 
 def loops_1a():
     """Make 10 stars.
-
     Using a for loop
     return a list of 10 items, each one a string with exacly one star in it.
     E.g.: ['*', '*', '*', '*', '*', '*', '*', '*', '*', '*']
+    *append pushes something to the end
     """
-    pass
+    star_list = []
+    for i in range(10):
+        star_list.append("*")
+
+    return star_list
 
 
 def star_map():
@@ -59,7 +63,13 @@ def star_map():
     if it's even. Reuse the is odd function that you've already written.
     E.g.: ["!", "*", "!", "*", "!", "*", "!", "*", "!", "*"]
     """
-    pass
+    def star_or_bang(a_number):
+        if is_odd(a_number):
+            return "*"
+        else:
+            return "!"
+    result = map(star_or_bang, range(10))
+    return result
 
 
 def loops_1c(number_of_items=5, symbol="#"):
@@ -70,6 +80,12 @@ def loops_1c(number_of_items=5, symbol="#"):
     a string with exacly one symbol in it.
     E.g.: ['#', '#', '#', '#', '#']
     """
+
+    symbol_list = []
+    for i in range(number_of_items):
+        symbol_list.append(symbol)
+    return symbol_list
+
     pass
 
 
@@ -91,7 +107,11 @@ def loops_2():
             ['*', '*', '*', '*', '*', '*', '*', '*', '*', '*'],
           ]
     """
-    pass
+    star_square = []
+    for j in range(10):
+        star_square.append(loops_1c(number_of_items=10, symbol="*"))
+
+    return star_square
 
 
 def loops_3():
@@ -115,6 +135,14 @@ def loops_3():
     TIP: notice that this needs to to return strings of numbers,
          so call str(number) to cast.
     """
+    number_square = []
+    for i in range(10):
+        number_row = []
+        for j in range(10):
+            number_row.append(str(i))
+        number_square.append(number_row)
+
+    return number_square
     pass
 
 
