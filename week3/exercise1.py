@@ -117,14 +117,16 @@ def super_asker(low, high):
                                                                   high=high)
 
     while True:
-        input_num = int(raw_input(message))
-        if low < input_num < high:
-            try:
-                input_num = int(input_num)
-            except:
-                print("That is not a number!")
-        else:
-            print("Your input isnt within the bounds")
+        input_num = raw_input(message)
+        try:
+            input_num = int(input_num)
+            if low < input_num < high:
+                return input_num
+            else:
+                print("Your input isnt within the bounds")
+        except Exception as e:
+            print("That isn't a number...try again".format(e))
+
     return input_num
 
 
