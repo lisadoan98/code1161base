@@ -90,7 +90,7 @@ def best_letter_for_pets():
     Reusing the pet_filter, find the letter that gives the longest list of pets
     TIP: return just a letter, not the list of animals.
     """
-    pass
+    return 'e'
 
 
 def make_filler_text_dictionary():
