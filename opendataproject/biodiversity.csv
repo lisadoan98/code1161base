@@ -1,0 +1,13 @@
+Species,Year,Conservation dependent,Vulnerable,Endangered,Critically endangered
+Mammal,2011,0,55,35,4
+Mammal,2015,0,58,38,6
+Bird,2011,0,60,43,6
+Bird,2015,0,65,46,13
+Reptile,2011,0,37,15,4
+Reptile,2015,0,33,17,8
+Amphibian,2011,0,12,15,2
+Amphibian,2015,0,10,14,5
+Fish,2011,4,26,16,3
+Fish,2015,7,24,16,7
+Other species,2011,0,8,17,19
+Other species,2015,0,12,19,24
