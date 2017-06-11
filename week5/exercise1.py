@@ -32,16 +32,18 @@ from __future__ import print_function
 # It should say something different in the last message.
 def countdown(message, start, stop, completion_message):
     """Counting down."""
-    countdown = []
-    if start < stop:
-        step = 1
-    else:
+    countdown_list = []
+    if start > stop:
         step = -1
+    elif start == stop:
+        return(completion_message)
+    else:
+        step = 1
     for i in range(start, stop, step):
-        message_count = (message + str(i))
-        countdown.append(message_count)
-        countdown.append(completion_message)
-    return countdown
+        countdown_list.append(message + " {}".format(i))
+    countdown_list.append(completion_message)
+
+    return(countdown_list)
 
 
 # TRIANGLES
@@ -171,12 +173,13 @@ def triangle_master(base,
 
 def wordy_pyramid():
     """Make a pyramid out of words."""
-    pyramid_list = []
+    list_of_lengths = []
     for i in range(3, 21, 2):
-        pyramid_list.append(i)
+        list_of_lengths.append(i)
     for i in range(20, 3, -2):
-        pyramid_list.append(i)
-    return pyramid_list
+        list_of_lengths.append(i)
+
+    return(list_of_words_with_lengths(list_of_lengths))
 
 
 def get_a_word_of_length_n(length):
