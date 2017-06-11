@@ -28,40 +28,20 @@ from __future__ import division
 from __future__ import print_function
 
 
-# This is a terrible function. The rest of the functions in this file do a
-# much better job of what it's trying to do. Once you've has a little look,
-# move on, and eventually delete this function. (And this comment!)
-def do_bunch_of_bad_things():
-    print("Getting ready to start in 9")
-    print("Getting ready to start in 8")
-    print("Getting ready to start in 7")
-    print("Getting ready to start in 6")
-    print("Getting ready to start in 5")
-    print("Getting ready to start in 4")
-    print("Getting ready to start in 3")
-    print("Getting ready to start in 2")
-    print("Getting ready to start in 1")
-    print("Let's go!")
-
-    triangle = {"base": 3, "height": 4}
-    triangle["hypotenuse"] = triangle["base"]**2 + triangle["height"]**2
-    print("area = " + str((triangle["base"] * triangle["height"])/2))
-    print("side lengths are:")
-    print("base: {}".format(triangle["base"]))
-    print("height: {}".format(triangle["height"]))
-    print("hypotenuse: {}".format(triangle["hypotenuse"]))
-
-    another_hyp = 5**2 + 6**2
-    print(another_hyp)
-
-    yet_another_hyp = 40**2 + 30**2
-    print(yet_another_hyp)
-
-
 # return a lit of countdown messages, much like in the bad function above.
 # It should say something different in the last message.
 def countdown(message, start, stop, completion_message):
-    pass
+    """Counting down."""
+    countdown = []
+    if start < stop:
+        step = 1
+    else:
+        step = -1
+    for i in range(start, stop, step):
+        message_count = (message + str(i))
+        countdown.append(message_count)
+        countdown.append(completion_message)
+    return countdown
 
 
 # TRIANGLES
@@ -74,31 +54,44 @@ def countdown(message, start, stop, completion_message):
 # The stub functions are made for you, and each one is tested, so this should
 # hand hold quite nicely.
 def calculate_hypotenuse(base, height):
-    pass
+    """Calculate hypotenuse of a triangle."""
+    hypotenuse = (base**2 + height**2)**(1/2)
+    return hypotenuse
 
 
 def calculate_area(base, height):
-    pass
+    """Calculate area of a triangle."""
+    area = (base * height)/2
+    return area
 
 
 def calculate_perimeter(base, height):
-    pass
+    """Calculate perimeter of a triangle."""
+    perimeter = base + height + calculate_hypotenuse(base, height)
+    return perimeter
 
 
 def calculate_aspect(base, height):
-    pass
+    """Calculate aspect of a triangle."""
+    if base == height:
+        return "equal"
+    elif base > height:
+        return "wide"
+    else:
+        return "tall"
 
 
 # Make sure you reuse the functions you've already got
 # Don't reinvent the wheel
 def get_triangle_facts(base, height, units="mm"):
-    return {"area": None,
-            "perimeter": None,
-            "height": None,
-            "base": None,
-            "hypotenuse": None,
-            "aspect": None,
-            "units": None}
+    """Returning a dictionary."""
+    return {"area": calculate_area(base, height),
+            "perimeter": calculate_perimeter(base, height),
+            "height": height,
+            "base": base,
+            "hypotenuse": calculate_hypotenuse(base, height),
+            "aspect": calculate_aspect(base, height),
+            "units": units}
 
 
 # this should return a multi line string that looks a bit like this:
@@ -118,6 +111,7 @@ def get_triangle_facts(base, height, units="mm"):
 # but with the values and shape that relate to the specific
 # triangle we care about.
 def tell_me_about_this_right_triangle(facts_dictionary):
+    """Returning previous functions and dictionary as a diagram."""
     tall = """
             {height}
             |
@@ -147,46 +141,66 @@ def tell_me_about_this_right_triangle(facts_dictionary):
                "This is a {aspect} triangle.\n")
 
     facts = pattern.format(**facts_dictionary)
+    height = facts_dictionary["height"]
+    base = facts_dictionary["base"]
+
+    if base == height:
+        return(equal.format(**facts_dictionary) + "\n" + facts)
+    elif base > height:
+        return (wide.format(**facts_dictionary) + "\n" + facts)
+    else:
+        return (tall.format(**facts_dictionary) + "\n" + facts)
 
 
 def triangle_master(base,
                     height,
                     return_diagram=False,
                     return_dictionary=False):
+    """Returning everything."""
+    dictionary = get_triangle_facts(base, height)
+    diagram = tell_me_about_this_right_triangle(dictionary)
     if return_diagram and return_dictionary:
-        return None
+        return {'diagram': diagram, 'facts': dictionary}
     elif return_diagram:
-        return None
+        return diagram
     elif return_dictionary:
-        return None
+        return {'facts': dictionary}
     else:
         print("You're an odd one, you don't want anything!")
 
 
 def wordy_pyramid():
-    import requests
-    baseURL = "http://www.setgetgo.com/randomword/get.php?len="
+    """Make a pyramid out of words."""
     pyramid_list = []
     for i in range(3, 21, 2):
-        url = baseURL + str(i)
-        r = requests.get(url)
-        message = r.text
-        pyramid_list.append(message)
+        pyramid_list.append(i)
     for i in range(20, 3, -2):
-        url = baseURL + str(i)
-        r = requests.get(url)
-        message = r.text
-        pyramid_list.append(message)
+        pyramid_list.append(i)
     return pyramid_list
 
 
 def get_a_word_of_length_n(length):
-    pass
+    """Get word of a certain length from the URL."""
+    import requests
+    try:
+        length = int(length)
+        if length >= 3:
+            baseURL = "http://www.setgetgo.com/randomword/get.php?len="
+            url = baseURL + str(length)
+            r = requests.get(url)
+            message = r.text
+            return(message)
+    except ValueError:
+        message = None
 
 
 def list_of_words_with_lengths(list_of_lengths):
-    pass
+    """Return words that match the list of length."""
+    word_list = []
+    for i in range(len(list_of_lengths)):
+        word_list.append(get_a_word_of_length_n(list_of_lengths[i]))
+    return word_list
 
 
 if __name__ == "__main__":
-    do_bunch_of_bad_things()
+    pass

@@ -14,18 +14,14 @@ def get_the_updates():
     base = ("https://raw.githubusercontent.com/"
             "notionparallax/code1161base/master")
     new_files = [
-        "/week2/exercise0.py",
-        "/week4/IOexamples.py",
         "/week5/exercise1.py",
-        "/week5/exercise2.py"
-        ""
+        "/week5/tests.py"
     ]
 
     for f in new_files:
         save_path = "./" + f
         if not os.path.isfile(save_path) and f is not "":
             url = base + f
-            print("downloading", url)
             download_and_save(url, save_path)
         elif f is "":
             pass  # do nothing, it's padding

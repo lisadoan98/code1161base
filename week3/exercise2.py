@@ -9,7 +9,6 @@ import random
 
 def exampleGuessingGame():
     """Play a game with the user.
-
     This is an example guessing game. It'll test as an example too.
     """
     print("\nwelcome to the guessing game!")

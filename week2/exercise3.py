@@ -32,7 +32,7 @@ def fix_it(moves=True, should_move=True):
     elif not moves and should_move:
         return "WD-40"
     else:
-        return "Something's not right here mate, looks expensive"
+        return "OK."
 
 
 def loops_1a():
@@ -154,7 +154,7 @@ def loops_4():
     for i in range(10):
         number_row = []
         for j in range(10):
-            number_row.append(j)
+            number_row.append(str(j))
         number_square.append(number_row)
     print(number_square)
     return number_square

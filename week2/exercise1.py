@@ -21,6 +21,7 @@ print(1+1, "is smaller than", 7*0.5, "is",
 
 
 def usefulFunction():
+    """Missing docstring."""
     print(os.getcwd())
 
 
