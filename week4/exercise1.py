@@ -28,7 +28,9 @@ def success_is_relative():
     # this depends on excecution context. Take a look at your CWD and remember
     # that it changes.
     # print(path, CWD)
-    pass
+    week1file = '/week1/pySuccessMessage.json'
+    with open(os.path.join(os.getcwd() + week1file), 'r') as success_message:
+        return success_message.read().strip()
 
 
 def get_some_details():
@@ -50,9 +52,11 @@ def get_some_details():
     json_data = open(LOCAL + "/lazyduck.json").read()
 
     data = json.loads(json_data)
-    return {"lastName":       None,
-            "password":       None,
-            "postcodePlusID": None
+    result = data["results"][0]
+    return {"lastName":       result["name"]["last"],
+            "password":       result["login"]["password"],
+            "postcodePlusID": result["location"]["postcode"] +
+            int(result["id"]["value"])
             }
 
 
@@ -88,7 +92,14 @@ def wordy_pyramid():
     ]
     TIP: to add an argument to a URL, use: ?argName=argVal e.g. ?len=
     """
-    pass
+    letter_counts = range(3, 20, 2) + range(4, 21, 2)[::-1]
+    words = []
+    url = 'http://randomword.setgetgo.com/get.php'
+    for letter_count in letter_counts:
+        r = requests.get(url, params={"len": str(letter_count)})
+        words.append(r.text)
+
+    return words
 
 
 def wunderground():
@@ -103,19 +114,20 @@ def wunderground():
          variable and then future access will be easier.
     """
     base = "http://api.wunderground.com/api/"
-    api_key = "YOUR KEY - REGISTER TO GET ONE"
+    api_key = "bc54a4eaad8a7061"
     country = "AU"
     city = "Sydney"
     template = "{base}/{key}/conditions/q/{country}/{city}.json"
     url = template.format(base=base, key=api_key, country=country, city=city)
     r = requests.get(url)
     the_json = json.loads(r.text)
-    obs = the_json['current_observation']
+    obs = the_json["current_observation"]
+    obs2 = obs["display_location"]
 
-    return {"state":           None,
-            "latitude":        None,
-            "longitude":       None,
-            "local_tz_offset": None}
+    return {"state":           obs2["state"],
+            "latitude":        obs2["latitude"],
+            "longitude":       obs2["longitude"],
+            "local_tz_offset": obs["local_tz_offset"]}
 
 
 def diarist():
@@ -131,7 +143,18 @@ def diarist():
     TIP: remember to commit 'lasers.pew' and push it to your repo, otherwise
          the test will have nothing to look at.
     """
-    pass
+    count = 0
+    laser_file = '/week4/Trispokedovetiles(laser).gcode'
+    with open(os.path.join(os.getcwd() + laser_file), 'r') as laser:
+        commands = laser.read().split('\n')
+        for command in commands:
+            if "M10 P1" in command:
+                count += 1
+
+    pew_file = '/week4/lasers.pew'
+    with open(os.path.join(os.getcwd() + pew_file), 'w') as pew:
+        pew.write(str(count))
+    return count
 
 
 if __name__ == "__main__":
