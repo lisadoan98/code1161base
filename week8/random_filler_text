@@ -1,0 +1,8 @@
+import requests
+d = {}
+l = []
+
+url = "http://www.setgetgo.com/randomword/get.php?len="
+count = 1
+while count < 4:
+    random_word = requests.get(url + '3').text
