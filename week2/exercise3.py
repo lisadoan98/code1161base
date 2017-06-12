@@ -9,10 +9,7 @@ def is_odd(a_number):
     module division using the '%' operator as one way of doing this. '%' is lik
     e division only it checks for the remainder so if the number
     divided by two has a remainder of 0 its even otherwise odd """
-    if (a_number) % 2 == 0:
-        return False
-    else:
-        return True
+    return (a_number % 2) != 0
 
 
 def fix_it(moves=True, should_move=True):
